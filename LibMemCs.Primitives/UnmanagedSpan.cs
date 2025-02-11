@@ -116,6 +116,7 @@ namespace LibMemCs.Primitives
 			public UnmanagedSpanEnumerator(UnmanagedSpan<T> reference)
 			{
 				_reference = reference;
+				_index = 0;
 			}
 
 			public readonly void Dispose()

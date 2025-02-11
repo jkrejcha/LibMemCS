@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <LangVersion>11.0</LangVersion>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -17,17 +18,21 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <IsAotCompatible>True</IsAotCompatible>
-    <IsTrimmable>True</IsTrimmable>
+    <IsAotCompatible Condition="$([MsBuild]::IsTargetFrameworkCompatible('$(TargetFramework)','net7.0'))">True</IsAotCompatible>
+    <IsTrimmable Condition="$([MsBuild]::IsTargetFrameworkCompatible('$(TargetFramework)','net6.0'))">True</IsTrimmable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <IsAotCompatible>True</IsAotCompatible>
-    <IsTrimmable>True</IsTrimmable>
+    <IsAotCompatible Condition="$([MsBuild]::IsTargetFrameworkCompatible('$(TargetFramework)','net7.0'))">True</IsAotCompatible>
+    <IsTrimmable Condition="$([MsBuild]::IsTargetFrameworkCompatible('$(TargetFramework)','net6.0'))">True</IsTrimmable>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
